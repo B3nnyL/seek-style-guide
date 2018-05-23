@@ -10,19 +10,23 @@ const sizes = [
   'headline',
   'heading',
   'subheading',
+  'large',
   'standard',
   'small'
 ];
 const typeVars = lessToJs(type);
 const baseFontSize = parseInt(typeVars['@base-font-size'], 10);
 const symbolNames = sizes.reduce((obj, size, i) => {
-  const [ firstChar, ...restChars ] = size;
+  const [firstChar, ...restChars] = size;
   const name = `${firstChar.toUpperCase()}${restChars.join('')}`;
 
-  const desktopSize = parseFloat(typeVars[`@${size}-type-scale`]) * baseFontSize;
-  const mobileSize = parseFloat(typeVars[`@${size}-type-scale-mobile`]) * baseFontSize;
+  const desktopSize =
+    parseFloat(typeVars[`@${size}-type-scale`]) * baseFontSize;
+  const mobileSize =
+    parseFloat(typeVars[`@${size}-type-scale-mobile`]) * baseFontSize;
 
-  const symbolName = `${i + 1}. ${name} — Desktop: ${desktopSize}px, Mobile: ${mobileSize}px`;
+  const symbolName = `${i +
+    1}. ${name} — Desktop: ${desktopSize}px, Mobile: ${mobileSize}px`;
 
   return { ...obj, [size]: symbolName };
 }, {});
@@ -33,11 +37,24 @@ export const text = {
   [`${symbolNames.heading}`]: <Text heading>Heading text</Text>,
   [`${symbolNames.subheading}`]: <Text subheading>Subheading text</Text>,
   [`${symbolNames.standard}/1. Default`]: <Text>Standard text</Text>,
-  [`${symbolNames.standard}/2. Secondary`]: <Text secondary>Standard critical text</Text>,
-  [`${symbolNames.standard}/3. Strong`]: <Text strong>Standard strong text</Text>,
-  [`${symbolNames.standard}/4. Positive`]: <Text positive>Standard positive text</Text>,
-  [`${symbolNames.standard}/5. Critical`]: <Text critical>Standard critical text</Text>,
-  [`${symbolNames.standard}/6. Link`]: <Text><TextLink href="#">Standard link text</TextLink></Text>,
+  [`${symbolNames.standard}/2. Secondary`]: (
+    <Text secondary>Standard critical text</Text>
+  ),
+  [`${symbolNames.standard}/3. Strong`]: (
+    <Text strong>Standard strong text</Text>
+  ),
+  [`${symbolNames.standard}/4. Positive`]: (
+    <Text positive>Standard positive text</Text>
+  ),
+  [`${symbolNames.standard}/5. Critical`]: (
+    <Text critical>Standard critical text</Text>
+  ),
+  [`${symbolNames.standard}/6. Link`]: (
+    <Text>
+      <TextLink href="#">Standard link text</TextLink>
+    </Text>
+  ),
+  [`${symbolNames.large}`]: <Text large>Large text</Text>,
   [`${symbolNames.small}`]: <Text small>Small text</Text>
 };
 
